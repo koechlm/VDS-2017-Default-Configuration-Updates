@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DynamicsProperties>
+  <DynamicPropertiesCategory Category="3D component">
+    <DynamicProperty>Dimensions</DynamicProperty>
+    <DynamicProperty>Semi finished</DynamicProperty>
+    <DynamicProperty>Spare-Wear Part</DynamicProperty>
+    <DynamicProperty>Source File</DynamicProperty>
+    <DynamicProperty>Project Number</DynamicProperty>
+    <DynamicProperty>Ident Number</DynamicProperty>
+    <DynamicProperty>G_L</DynamicProperty>
+    <DynamicProperty>Material</DynamicProperty>
+    <DynamicProperty>Part Number</DynamicProperty>
+    <DynamicProperty>Title</DynamicProperty>
+    <DynamicProperty>Weight</DynamicProperty>
+    <DynamicProperty>Stock Number</DynamicProperty>
+    <DynamicProperty>Description</DynamicProperty>
+  </DynamicPropertiesCategory>
+</DynamicsProperties>

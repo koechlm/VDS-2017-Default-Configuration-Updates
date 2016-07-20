@@ -185,20 +185,18 @@
                    Grid.Row="0"
                    Grid.Column="0" />
             <ComboBox x:Name="Categories"
-                      SelectedItem="{Binding DynamicPropertiesCategory}"
-                      ItemsSource="{Binding PsList[GetCategories]}"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Name"
+                      SelectedItem="{Binding DynamicPropertiesCategory}"
                       SelectedValue="{Binding Prop[_Category].Value}"
+                      ItemsSource="{Binding PsList[GetCategories]}"
                       Grid.Column="1"
                       IsEnabled="{Binding CreateMode}" />
             <Label Grid.Row="1"
                    Grid.Column="0"
                    Content="{Binding UIString[LBL10], FallbackValue=Number Scheme}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" Height="Auto" />
-            <ComboBox Grid.Column="1"
-                      Grid.Row="1"
-                      x:Name="NumSchms"
+            <ComboBox x:Name="NumSchms" Grid.Column="1" Grid.Row="1"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_NumSchm].Value}"

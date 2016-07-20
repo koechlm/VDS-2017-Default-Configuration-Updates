@@ -199,22 +199,20 @@
                                   MinWidth="180" MaxWidth="220" />
             </Grid.ColumnDefinitions>
             <Label Content="{Binding UIString[LBL8], FallbackValue=Categories}" Grid.Row="0" Grid.Column="0" />
-            <ComboBox x:Name="Categories" ItemsSource="{Binding PsList[GetCategories]}"
+            <ComboBox x:Name="Categories" Grid.Row="0" Grid.Column="1"
                       DisplayMemberPath="Name" SelectedItem="{Binding DynamicPropertiesCategory}"
                       SelectedValuePath="Name" SelectedValue="{Binding Prop[_Category].Value}"
-                      Grid.Row="0" Grid.Column="1"
+                      ItemsSource="{Binding PsList[GetCategories]}"
                       IsEnabled="{Binding CreateMode}" />
             <Label Content="{Binding UIString[LBL23], FallbackValue=DocTypes}" Grid.Row="1" Grid.Column="0"
                    Visibility="{Binding Visibility, ElementName=DocTypeCombo}" />
-            <ComboBox ItemsSource="{Binding Source={StaticResource DocTypes}, XPath=DocTypeInfo}"
-                      x:Name="DocTypeCombo"
-                      Grid.Row="1"
-                      Grid.Column="1"
+            <ComboBox x:Name="DocTypeCombo" Grid.Row="1" Grid.Column="1"
                       IsEnabled="{Binding CreateMode}"
                       DisplayMemberPath="DocName"
                       SelectedValuePath="Path"
                       SelectedValue="{Binding TemplatePath}"
                       SelectedIndex="0"
+                      ItemsSource="{Binding Source={StaticResource DocTypes}, XPath=DocTypeInfo}"
                       Style="{StaticResource DocTypeStyle}" />
             <Label Content="{Binding UIString[LBL9], FallbackValue=Templates}" Grid.Row="2" Grid.Column="0"
                    Visibility="{Binding Visibility, ElementName=TemplateCB}" />
@@ -242,7 +240,8 @@
             </Grid>
             <Label Content="{Binding UIString[LBL10],FallbackValue=Numberingscheme}" Grid.Column="0" Grid.Row="3"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" />
-            <ComboBox Grid.Column="1" Grid.Row="3" x:Name="NumSchms" DisplayMemberPath="Name"
+            <ComboBox x:Name="NumSchms" Grid.Column="1" Grid.Row="3"  
+                      DisplayMemberPath="Name"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_NumSchm].Value}"
                       ItemsSource="{Binding PsList[GetNumSchms]}"

@@ -183,23 +183,18 @@
             <Label Content="{Binding UIString[LBL8], FallbackValue=Category}"
                    Grid.Row="0"
                    Grid.Column="0" Height="Auto" />
-            <ComboBox x:Name="Categories"
+            <ComboBox x:Name="Categories" Grid.Row="0" Grid.Column="1"
                       DisplayMemberPath="Name"
                       SelectedItem="{Binding DynamicPropertiesCategory}"
-                      ItemsSource="{Binding PsList[GetCategories]}"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_Category].Value}"
-                      Grid.Row="0"
-                      Grid.Column="1"
-                      IsEnabled="{Binding CreateMode}"
-                      Height="Auto" />
+                      ItemsSource="{Binding PsList[GetCategories]}"
+                      IsEnabled="{Binding CreateMode}"/>
             <Label Grid.Row="1"
                    Grid.Column="0"
                    Content="{Binding UIString[LBL10], FallbackValue=Number Scheme}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" />
-            <ComboBox Grid.Column="1"
-                      Grid.Row="1"
-                      x:Name="NumSchms"
+            <ComboBox x:Name="NumSchms" Grid.Column="1" Grid.Row="1"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_NumSchm].Value}"
@@ -208,9 +203,7 @@
                       Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Label Grid.Row="2" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
                    Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" Height="Auto" />
-            <WPF:DSNumSchemeCtrl Grid.Row="2"
-                                 Grid.Column="1"
-                                 x:Name="DSNumSchmsCtrl"
+            <WPF:DSNumSchemeCtrl x:Name="DSNumSchmsCtrl" Grid.Row="2" Grid.Column="1"
                                  Scheme="{Binding SelectedItem, ElementName=NumSchms}"
                                  IsEnabled="{Binding IsEnabled, ElementName=NumSchms}"
                                  GeneratedNumberProperty="DocNumber"

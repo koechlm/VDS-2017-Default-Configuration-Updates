@@ -9,11 +9,8 @@
               mc:Ignorable="d"
               Name="InventorDesignAcceleratorWindow"
               Title="{Binding UIString[LBL50]}"
-              Height="400"
-              Width="800"
-              MinWidth="710"
-              MinHeight="380"
-              Background="#F0F0F0">
+              Background="#F0F0F0" WindowStyle="ToolWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
+              Topmost="True">
     <WPF:DSWindow.Resources>
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="Margin" Value="0,0,0,0" />
@@ -90,28 +87,13 @@
     <WPF:DSWindow.InputBindings>
         <!--<KeyBinding Key="F1" Command="{Binding PsCmd[mHelp(120)]}" />-->
     </WPF:DSWindow.InputBindings>
-    <WPF:DSWindow.Style>
-        <Style TargetType="{x:Type WPF:DSWindow}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding CreateMode}"
-                             Value="True">
-                    <Setter Property="Title"
-                            Value="New File" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding CreateMode}"
-                             Value="False">
-                    <Setter Property="Title"
-                            Value="{Binding PathAndFileNameHandler.FileName, StringFormat=Edit File Datasheet - \'\{0\}\'}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </WPF:DSWindow.Style>
+    
     <Grid x:Name="grdMain" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="130*" />
-            <RowDefinition Height="33*" />
-            <RowDefinition Height="40*" />
+            <RowDefinition Height="185*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="57*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"
@@ -130,16 +112,16 @@
             </Grid.RowDefinitions>
             <Label x:Name="lblNumbering" Content="{Binding UIString[LBL10], FallbackValue=Numbering}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" />
-            <ComboBox Grid.Column="1" Grid.Row="0" x:Name="NumSchms" DisplayMemberPath="Name" SelectedIndex="0"
-                      ItemsSource="{Binding PsList[GetNumSchms]}"
+            <ComboBox Grid.Column="1" Grid.Row="0" x:Name="NumSchms" 
+                      DisplayMemberPath="Name" SelectedIndex="0"
+                      ItemsSource="{Binding PsList[GetNumSchms], Mode=OneTime}"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}" />
             <Label Grid.Row="1" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
-                   Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" />
+                   Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" BorderThickness="1" />
             <WPF:DSNumSchemeCtrl x:Name="DSNumSchmsCtrl" Grid.Row="1" Grid.Column="1"
                                  Scheme="{Binding SelectedItem, ElementName=NumSchms, Mode=TwoWay}"
                                  Visibility="{Binding CreateMode, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                 GeneratedNumberProperty="DocNumber" Style="{StaticResource NumSchmCtrlStyle}"
-                                 BorderThickness="0,1,1,1" />
+                                 GeneratedNumberProperty="DocNumber" Style="{StaticResource NumSchmCtrlStyle}" BorderThickness="0,1,1,1" />
         </Grid>
         <!--Grid for DocumentTypes-->
         <Grid x:Name="grdLeft" Grid.Column="0"
@@ -203,10 +185,10 @@
                    Grid.Column="0" Grid.Row="2" Height="Auto" />
             <TextBox x:Name="txtPartNumber" Grid.Column="1" Grid.Row="2" Text="{Binding Prop[Part Number].Value}" Height="Auto" />
             <Label x:Name="lblStockNumber" Content="{Binding UIString[LBL76], FallbackValue=Stock Number}"
-                   Grid.Column="0" Grid.Row="3" Height="Auto" />
+                   Grid.Column="0" Grid.Row="3" Height="Auto" BorderThickness="1" />
             <TextBox x:Name="txtStockNumber"
                      Text="{Binding Prop[Stock Number].Value, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
-                     Grid.Row="3" Height="Auto" />
+                     Grid.Row="3" Height="Auto" BorderThickness="0,1,1,1" />
             <Label x:Name="lblFileName" Content="{Binding UIString[LBL6], FallbackValue=File Name}" Grid.Row="4"
                    Visibility="{Binding NumSchmFieldsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DSNumSchmsCtrl}" BorderThickness="1" Height="Auto" />
             <TextBox Grid.Row="4"
@@ -221,7 +203,7 @@
                   ToolTip="Local Path" Margin="-6,0,0,0">
             <TextBox Text="{Binding PathAndFileNameHandler.Path}"
                      IsReadOnly="True"
-                     Background="#F0F0F0" BorderThickness="1" Margin="0,0,-6,0" />
+                     Background="#F0F0F0" BorderThickness="1" Margin="0,0,-6,0" VerticalAlignment="Top" />
         </GroupBox>
         <Grid x:Name="grdButton" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>

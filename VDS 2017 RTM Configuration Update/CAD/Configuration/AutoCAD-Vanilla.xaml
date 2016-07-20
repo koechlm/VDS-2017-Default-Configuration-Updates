@@ -98,7 +98,7 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-		<Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource {x:Type ComboBox}}">
             <Setter Property="Height" Value="24"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -121,7 +121,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-		<Style x:Key="ButtonGridStyle" TargetType="{x:Type Grid}">
+        <Style x:Key="ButtonGridStyle" TargetType="{x:Type Grid}">
             <Setter Property="Margin" Value="0,15,2,5"/>
         </Style>
         <Style x:Key="NumSchmCtrlStyle" TargetType="{x:Type WPF:DSNumSchemeCtrl}">
@@ -174,30 +174,27 @@
             </Grid.ColumnDefinitions>
             <Label Content="{Binding UIString[LBL8], FallbackValue=Category}"
                    Grid.Row="0"
-                   Grid.Column="0" />
-            <ComboBox x:Name="Categories"
-                      SelectedItem="{Binding DynamicPropertiesCategory}"
-                      ItemsSource="{Binding PsList[GetCategories]}"
+                   Grid.Column="0" Height="Auto" />
+            <ComboBox x:Name="Categories" Grid.Column="1"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Name"
+                      SelectedItem="{Binding DynamicPropertiesCategory}"
                       SelectedValue="{Binding Prop[_Category].Value}"
-                      Grid.Column="1"
+                      ItemsSource="{Binding PsList[GetCategories]}"
                       IsEnabled="{Binding CreateMode}" />
             <Label Grid.Row="1"
                    Grid.Column="0"
                    Content="{Binding UIString[LBL10], FallbackValue=Number Scheme}"
-                   Visibility="{Binding Visibility, ElementName=NumSchms}" />
-            <ComboBox Grid.Column="1"
-                      Grid.Row="1"
-                      x:Name="NumSchms"
+                   Visibility="{Binding Visibility, ElementName=NumSchms}" Height="Auto" />
+            <ComboBox x:Name="NumSchms" Grid.Column="1" Grid.Row="1"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_NumSchm].Value}"
                       ItemsSource="{Binding PsList[GetNumSchms]}"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}"
-                      Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                      Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}" Height="Auto" />
             <Label Grid.Row="2" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
-                   Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" />
+                   Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" Height="Auto" />
             <WPF:DSNumSchemeCtrl Grid.Row="2"
                                  Grid.Column="1"
                                  x:Name="DSNumSchmsCtrl"
@@ -205,30 +202,30 @@
                                  IsEnabled="{Binding ElementName=NumSchms, Path=IsEnabled}"
                                  GeneratedNumberProperty="DocNumber"
                                  Visibility="{Binding CreateMode, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                 Style="{StaticResource NumSchmCtrlStyle}" />
+                                 Style="{StaticResource NumSchmCtrlStyle}" Height="Auto" />
             <Label Content="{Binding UIString[LBL6], FallbackValue=File Name}"
                    Grid.Row="3"
                    Grid.Column="0"
-                   Visibility="{Binding Visibility, ElementName=FILENAME }" />
+                   Visibility="{Binding Visibility, ElementName=FILENAME }" Height="Auto" />
             <TextBox Grid.Row="3"
                      Grid.Column="1"
                      x:Name="FILENAME"
                      Text="{WPF:ValidatedBinding Prop[DocNumber].Value}"
                      IsReadOnly="{Binding EditMode}"
-                     Visibility="{Binding NumSchmFieldsEmpty, ElementName=DSNumSchmsCtrl, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                     Visibility="{Binding NumSchmFieldsEmpty, ElementName=DSNumSchmsCtrl, Converter={StaticResource BooleanToVisibilityConverter}}" Height="Auto" />
             <Label Content="{Binding UIString[LBL2], FallbackValue=Title}"
                    Grid.Column="0"
-                   Grid.Row="4" />
-            <TextBox Text="{WPF:ValidatedBinding Prop[Title].Value}" Grid.Column="1" Grid.Row="4" />
+                   Grid.Row="4" Height="Auto" />
+            <TextBox Text="{WPF:ValidatedBinding Prop[Title].Value}" Grid.Column="1" Grid.Row="4" Height="Auto" />
             <Label Content="{Binding UIString[LBL3], FallbackValue=Description}"
                    Grid.Column="0"
-                   Grid.Row="5" BorderThickness="1" />
+                   Grid.Row="5" BorderThickness="1" Height="Auto" />
             <TextBox Text="{Binding Prop[Description].Value}"
                      Grid.Column="1"
                      Grid.Row="5"
                      x:Name="Description"
                      MaxHeight="50"
-                     AcceptsReturn="True" BorderThickness="0,1,1,1" />
+                     AcceptsReturn="True" BorderThickness="0,1,1,1" Height="Auto" />
             <Border
                 BorderBrush="Green"
                 Visibility="{Binding CopyMode, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="6"

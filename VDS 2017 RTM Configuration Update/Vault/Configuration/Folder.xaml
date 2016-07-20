@@ -176,20 +176,20 @@
                 <ColumnDefinition MinWidth="140" MaxWidth="220" />
             </Grid.ColumnDefinitions>
             <Label Content="{Binding UIString[LBL8], FallbackValue=Categories}" Grid.Row="0" Grid.Column="0" />
-            <ComboBox x:Name="Categories" ItemsSource="{Binding PsList[GetCategories]}"
+            <ComboBox x:Name="Categories" Grid.Row="0" Grid.Column="1"
                       DisplayMemberPath="Name" SelectedItem="{Binding DynamicPropertiesCategory}"
                       SelectedValuePath="Name" SelectedValue="{Binding Prop[_Category].Value}"
-                      Grid.Row="0" Grid.Column="1"
+                      ItemsSource="{Binding PsList[GetCategories]}"
                       IsEnabled="{Binding CreateMode}" />
             <Label x:Name="lblNumSchm" Content="{Binding UIString[LBL10], FallbackValue=Numberingscheme}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" Grid.Row="1" />
-            <ComboBox x:Name="NumSchms" DisplayMemberPath="Name"
+            <ComboBox x:Name="NumSchms" Grid.Row="1" Grid.Column="1"
+                      DisplayMemberPath="Name"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_NumSchm].Value}"
                       ItemsSource="{Binding PsList[GetNumSchms]}"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}"
-                      Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"
-                      Grid.Row="1" Grid.Column="1" />
+                      Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Label x:Name="lblProjectNumber" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
                    Grid.Row="2" Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" Height="Auto" />
             <WPF:DSNumSchemeCtrl x:Name="DSNumSchmsCtrl" Style="{StaticResource NumSchmCtrlStyle}"

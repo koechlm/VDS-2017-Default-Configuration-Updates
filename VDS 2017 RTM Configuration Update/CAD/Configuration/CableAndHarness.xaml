@@ -128,7 +128,7 @@
             <Label x:Name="lblNumbering" Content="{Binding UIString[LBL10], FallbackValue=Numbering}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" />
             <ComboBox x:Name="NumSchms" DisplayMemberPath="Name" SelectedIndex="0"
-                      ItemsSource="{Binding PsList[GetNumSchms]}" Grid.Column="1"
+                      ItemsSource="{Binding PsList[GetNumSchms], Mode=OneTime}" Grid.Column="1"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}" />
             <Label Grid.Row="1" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
                    Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" />

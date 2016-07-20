@@ -177,14 +177,12 @@
             <Label Content="{Binding UIString[LBL8], FallbackValue=Category}"
         		Grid.Row="0"
         		Grid.Column="0" Height="Auto" />
-            <ComboBox x:Name="Categories"
+            <ComboBox x:Name="Categories" Grid.Row="0" Grid.Column="1"
+                      SelectedValuePath="Name"
+                      SelectedValue="{Binding Prop[_Category].Value}"
                       DisplayMemberPath="Name"
                       SelectedItem="{Binding DynamicPropertiesCategory}"
                       ItemsSource="{Binding PsList[GetCategories]}"
-                      SelectedValuePath="Name"
-                      SelectedValue="{Binding Prop[_Category].Value}"
-                      Grid.Row="0"
-                      Grid.Column="1"
                       IsEnabled="{Binding CreateMode}"/>
             <Label Grid.Row="2"
         		Grid.Column="0"
@@ -237,8 +235,9 @@
             <Label Content="{Binding UIString[LBL71], FallbackValue='Save As Type'}" Grid.Row="1"/>
             <ComboBox x:Name="Format" Grid.Column="1" Grid.Row="1"
                       SelectedItem="{Binding Prop[_Format].Value, Mode=TwoWay}"
+                      SelectedIndex="0"
                       ItemsSource="{Binding Prop[_Format].ListValues}"
-                      SelectedIndex="0"/>
+                      />
         </Grid>
         <Grid x:Name="DSDynCatPropGrid" MinHeight="80" Grid.Column="1" Margin="5,0,0,0" Grid.Row="1" ToolTip="{Binding UIString[LBL63], FallbackValue='Category Properties'}">
             <DataGrid x:Name="DSDynamicCategoryProperties"

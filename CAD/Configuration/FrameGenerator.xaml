@@ -96,29 +96,13 @@
     <WPF:DSWindow.InputBindings>
         <!--<KeyBinding Key="F1" Command="{Binding PsCmd[mHelp(120)]}" />-->
     </WPF:DSWindow.InputBindings>
-    <WPF:DSWindow.Style>
-        <Style TargetType="{x:Type WPF:DSWindow}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding CreateMode}"
-                             Value="True">
-                    <Setter Property="Title"
-                            Value="New File" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding CreateMode}"
-                             Value="False">
-                    <Setter Property="Title"
-                            Value="{Binding PathAndFileNameHandler.FileName, StringFormat=Edit File Datasheet - \'\{0\}\'}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </WPF:DSWindow.Style>
 
     <Grid x:Name="grdMain" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="130*" />
-            <RowDefinition Height="33*" />
-            <RowDefinition Height="40*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"
@@ -137,11 +121,12 @@
             </Grid.RowDefinitions>
             <Label x:Name="lblNumbering" Content="{Binding UIString[LBL10], FallbackValue=Numbering}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" />
-            <ComboBox x:Name="NumSchms" DisplayMemberPath="Name" SelectedIndex="0"
-                      ItemsSource="{Binding PsList[GetNumSchms]}" Grid.Column="1"
+            <ComboBox Grid.Column="1" Grid.Row="0" x:Name="NumSchms" 
+                      DisplayMemberPath="Name" SelectedIndex="0"
+                      ItemsSource="{Binding PsList[GetNumSchms], Mode=OneTime}"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}" />
             <Label Grid.Row="1" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
-                   Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" />
+                   Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" BorderThickness="1" />
             <WPF:DSNumSchemeCtrl x:Name="DSNumSchmsCtrl" Grid.Row="1" Grid.Column="1"
                                  Scheme="{Binding SelectedItem, ElementName=NumSchms}"
                                  Visibility="{Binding CreateMode, Converter={StaticResource BooleanToVisibilityConverter}}"
@@ -222,10 +207,10 @@
                    Grid.Column="0" Grid.Row="2" />
             <TextBox x:Name="txtPartNumber" Grid.Column="1" Grid.Row="2" Text="{Binding Prop[Part Number].Value}" />
             <Label x:Name="lblStockNumber" Content="{Binding UIString[LBL76], FallbackValue=Stock Number}"
-                   Grid.Column="0" Grid.Row="3" />
+                   Grid.Column="0" Grid.Row="3" BorderThickness="1" />
             <TextBox x:Name="txtStockNumber"
                      Text="{Binding Prop[Stock Number].Value, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
-                     Grid.Row="3" />
+                     Grid.Row="3" BorderThickness="0,1,1,1" />
             <Label x:Name="lblFileName" Content="{Binding UIString[LBL6], FallbackValue=File Name}" Grid.Row="4"
                    BorderThickness="1"
                    Visibility="{Binding NumSchmFieldsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DSNumSchmsCtrl}" />
