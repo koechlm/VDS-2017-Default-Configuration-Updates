@@ -177,18 +177,20 @@
                 <ColumnDefinition MinWidth="140" MaxWidth="220" />
             </Grid.ColumnDefinitions>
             <Label Content="{Binding UIString[LBL8], FallbackValue=Category}" Grid.Column="0" />
-            <ComboBox x:Name="Categories" ItemsSource="{Binding PsList[GetCategories]}"
+            <ComboBox x:Name="Categories" Grid.Column="1"
                       DisplayMemberPath="Name"
                       SelectedItem="{Binding DynamicPropertiesCategory}"
                       SelectedValuePath="Name"
-                      SelectedValue="{Binding Prop[_Category].Value}" Grid.Column="1" IsEnabled="{Binding CreateMode}"
+                      SelectedValue="{Binding Prop[_Category].Value}"  
+                      ItemsSource="{Binding PsList[GetCategories], Mode=OneTime}"
+                      IsEnabled="{Binding CreateMode}"
                       BorderBrush="#FFF0F0F0" BorderThickness="0,1,1,0" IsTabStop="False" />
             <Label x:Name="lblNumSchm" Content="{Binding UIString[LBL10], FallbackValue=Numberingscheme}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" Grid.Row="1" />
             <ComboBox x:Name="NumSchms" DisplayMemberPath="Name"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_NumSchm].Value}"
-                      ItemsSource="{Binding PsList[GetNumSchms]}"
+                      ItemsSource="{Binding PsList[GetNumSchms], Mode=OneTime}"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}"
                       Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"
                       Grid.Row="1" Grid.Column="1" />

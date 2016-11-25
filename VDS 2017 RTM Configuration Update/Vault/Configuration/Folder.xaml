@@ -179,7 +179,7 @@
             <ComboBox x:Name="Categories" Grid.Row="0" Grid.Column="1"
                       DisplayMemberPath="Name" SelectedItem="{Binding DynamicPropertiesCategory}"
                       SelectedValuePath="Name" SelectedValue="{Binding Prop[_Category].Value}"
-                      ItemsSource="{Binding PsList[GetCategories]}"
+                      ItemsSource="{Binding PsList[GetCategories], Mode=OneTime}"
                       IsEnabled="{Binding CreateMode}" />
             <Label x:Name="lblNumSchm" Content="{Binding UIString[LBL10], FallbackValue=Numberingscheme}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" Grid.Row="1" />
@@ -187,7 +187,7 @@
                       DisplayMemberPath="Name"
                       SelectedValuePath="Name"
                       SelectedValue="{Binding Prop[_NumSchm].Value}"
-                      ItemsSource="{Binding PsList[GetNumSchms]}"
+                      ItemsSource="{Binding PsList[GetNumSchms], Mode=OneTime}"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}"
                       Visibility="{Binding NotEditMode, Converter={StaticResource BooleanToVisibilityConverter}}"/>
             <Label x:Name="lblProjectNumber" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"

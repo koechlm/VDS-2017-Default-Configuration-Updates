@@ -1,8 +1,0 @@
-VDS 2017 RTM Configuration Update 01 - 2016-05-31
------------------------------------------------------
-all 4 Inventor Functional Dialogs: Layout Correction in Property Grid, Line numbers, Reset Margins
-AutoCAD Dialog: Reset Margin Number Label
-de-DE\UIString.xml: Added info block for override/labeling of Inventor custom iProperty
-en-US\UIString.xml: Added info block for override/labeling of Inventor custom iProperty
-de-DE\PropertyTranslation.xml: removed space at end of >Version erstellt<
------------------------------------------------------

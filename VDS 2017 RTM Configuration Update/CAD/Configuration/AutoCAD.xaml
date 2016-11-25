@@ -189,7 +189,7 @@
                       SelectedValuePath="Name"
                       SelectedItem="{Binding DynamicPropertiesCategory}"
                       SelectedValue="{Binding Prop[_Category].Value}"
-                      ItemsSource="{Binding PsList[GetCategories]}"
+                      ItemsSource="{Binding PsList[GetCategories], Mode=OneTime}"
                       Grid.Column="1"
                       IsEnabled="{Binding CreateMode}" />
             <Label Grid.Row="1"

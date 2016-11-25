@@ -9,11 +9,7 @@
               mc:Ignorable="d"
               Name="InventorDesignAcceleratorWindow"
               Title="{Binding UIString[LBL50]}"
-              Height="400"
-              Width="800"
-              MinWidth="710"
-              MinHeight="380"
-              Background="#F0F0F0">
+              Background="#F0F0F0" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <WPF:DSWindow.Resources>
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="Margin" Value="0,0,0,0" />
@@ -131,7 +127,7 @@
             <Label x:Name="lblNumbering" Content="{Binding UIString[LBL10], FallbackValue=Numbering}"
                    Visibility="{Binding Visibility, ElementName=NumSchms}" />
             <ComboBox Grid.Column="1" Grid.Row="0" x:Name="NumSchms" DisplayMemberPath="Name" SelectedIndex="0"
-                      ItemsSource="{Binding PsList[GetNumSchms]}"
+                      ItemsSource="{Binding PsList[GetNumSchms], Mode=OneTime}"
                       IsEnabled="{Binding HasItems, RelativeSource={RelativeSource Self}}" />
             <Label Grid.Row="1" Grid.Column="0" Content="{Binding UIString[LBL31], FallbackValue=Number}"
                    Visibility="{Binding Visibility, ElementName=DSNumSchmsCtrl}" />
@@ -170,52 +166,55 @@
                          ItemsSource="{Binding DesignAcceleratorParts}" />
             </Expander>
         </Grid>
+        <Border Grid.Column="1"
+        	Grid.Row="1" MaxWidth="750" Margin="5,0,0,0" BorderBrush="#FFABADB3" BorderThickness="0,0,0,1">
+            <Grid x:Name="grdRight"
+        		Background="#FFF0F0F0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140" />
+                    <ColumnDefinition
+        				MinWidth="320" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="lblTitle" Content="{Binding UIString[LBL2], FallbackValue=Title}" Grid.Column="0"
+        			Grid.Row="0" />
+                <TextBox x:Name="txtTitle" Text="{WPF:ValidatedBinding Prop[Title].Value}"
+        			Grid.Column="1"
+        			Grid.Row="0" />
+                <Label x:Name="lblDescription" Content="{Binding UIString[LBL3], FallbackValue=Description}"
+        			Grid.Column="0"
+        			Grid.Row="1" Height="Auto" />
+                <TextBox Text="{WPF:ValidatedBinding Prop[Description].Value}"
+        			Grid.Column="1"
+        			Grid.Row="1"
+        			x:Name="Description"
+        			MaxHeight="50"
+        			AcceptsReturn="True" Height="Auto" />
+                <Label x:Name="lblPartNumber" Content="{Binding UIString[LBL16], FallbackValue=Part Number}"
+        			Grid.Column="0" Grid.Row="2" Height="Auto" />
+                <TextBox x:Name="txtPartNumber" Grid.Column="1" Grid.Row="2" Text="{Binding Prop[Part Number].Value}" Height="Auto" />
+                <Label x:Name="lblStockNumber" Content="{Binding UIString[LBL76], FallbackValue=Stock Number}"
+        			Grid.Column="0" Grid.Row="3" Height="Auto" />
+                <TextBox x:Name="txtStockNumber"
+        			Text="{Binding Prop[Stock Number].Value, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
+        			Grid.Row="3" Height="Auto" />
+                <Label x:Name="lblFileName" Content="{Binding UIString[LBL6], FallbackValue=File Name}" Grid.Row="4"
+        			Visibility="{Binding NumSchmFieldsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DSNumSchmsCtrl}" BorderThickness="1"  />
+                <TextBox Grid.Row="4"
+        			Grid.Column="1"
+        			IsEnabled="{Binding SingleElementIsSelected}"
+        			x:Name="FILENAME"
+        			Text="{WPF:ValidatedBinding Prop[DocNumber].Value}"
+        			Visibility="{Binding NumSchmFieldsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DSNumSchmsCtrl}" BorderThickness="0,1,1,1"  />
+            </Grid>
+        </Border>
         <!--Grid for Data Sheet-->
-        <Grid x:Name="grdRight" Grid.Column="1"
-              Background="#FFF0F0F0" Grid.Row="1" MaxWidth="750" Margin="5,0,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140" />
-                <ColumnDefinition
-                    MinWidth="320" />
-            </Grid.ColumnDefinitions>
-            <Label x:Name="lblTitle" Content="{Binding UIString[LBL2], FallbackValue=Title}" Grid.Column="0"
-                   Grid.Row="0" />
-            <TextBox x:Name="txtTitle" Text="{WPF:ValidatedBinding Prop[Title].Value}"
-                     Grid.Column="1"
-                     Grid.Row="0" />
-            <Label x:Name="lblDescription" Content="{Binding UIString[LBL3], FallbackValue=Description}"
-                   Grid.Column="0"
-                   Grid.Row="1" Height="Auto" />
-            <TextBox Text="{WPF:ValidatedBinding Prop[Description].Value}"
-                     Grid.Column="1"
-                     Grid.Row="1"
-                     x:Name="Description"
-                     MaxHeight="50"
-                     AcceptsReturn="True" Height="Auto" />
-            <Label x:Name="lblPartNumber" Content="{Binding UIString[LBL16], FallbackValue=Part Number}"
-                   Grid.Column="0" Grid.Row="2" Height="Auto" />
-            <TextBox x:Name="txtPartNumber" Grid.Column="1" Grid.Row="2" Text="{Binding Prop[Part Number].Value}" Height="Auto" />
-            <Label x:Name="lblStockNumber" Content="{Binding UIString[LBL76], FallbackValue=Stock Number}"
-                   Grid.Column="0" Grid.Row="3" Height="Auto" />
-            <TextBox x:Name="txtStockNumber"
-                     Text="{Binding Prop[Stock Number].Value, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
-                     Grid.Row="3" Height="Auto" />
-            <Label x:Name="lblFileName" Content="{Binding UIString[LBL6], FallbackValue=File Name}" Grid.Row="4"
-                   Visibility="{Binding NumSchmFieldsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DSNumSchmsCtrl}" BorderThickness="1" Height="Auto" />
-            <TextBox Grid.Row="4"
-                     Grid.Column="1"
-                     IsEnabled="{Binding SingleElementIsSelected}"
-                     x:Name="FILENAME"
-                     Text="{WPF:ValidatedBinding Prop[DocNumber].Value}"
-                     Visibility="{Binding NumSchmFieldsEmpty, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=DSNumSchmsCtrl}" BorderThickness="0,1,1,1" Height="Auto" />
-        </Grid>
         <!--End Grid for Data Sheet-->
         <GroupBox x:Name="GroupPath" Header="Path" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="0"
                   ToolTip="Local Path" Margin="-6,0,0,0">
