@@ -35,7 +35,11 @@ function InitializeWindow
 	{
 		"InventorWindow"
 		{
-			#rules applying for Inventor	
+			If ($Prop["_CreateMode"].Value) 
+			{
+				$Prop["Part Number"].Value = "" #reset the part number for new files as Inventor writes the file name (no extension) as a default.
+			}
+						
 		}
 		"AutoCADWindow"
 		{
