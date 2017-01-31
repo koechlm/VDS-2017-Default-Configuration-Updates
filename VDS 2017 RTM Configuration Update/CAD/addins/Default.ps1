@@ -75,7 +75,30 @@ function SetWindowTitle
 	}
 	else
 	{
-		$windowTitle = "$($UIString["LBL25"]) - $($Prop["_FileName"].Value)"
+		$mWindowName = $dsWindow.Name
+		switch($mWindowName)
+		{
+			"InventorPipingWindow"
+			{
+				$windowTitle = $UIString["LBL39"]
+			}
+			"InventorDesignAcceleratorWindow"
+			{
+				$windowTitle = $UIString["LBL50"]
+			}
+			"InventorHarnessWindow"
+			{
+				$windowTitle = $UIString["LBL44"]
+			}
+			"InventorFrameWindow"
+			{
+				$windowTitle = $UIString["LBL54"]
+			}
+			default
+			{
+				$windowTitle = "$($UIString["LBL25"]) - $($Prop["_FileName"].Value)"
+			}
+		}
 	}
 	return $windowTitle
 }
