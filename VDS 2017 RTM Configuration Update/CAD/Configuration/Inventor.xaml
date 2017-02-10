@@ -14,7 +14,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value}"
+                        <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value, StringFormat=N}"
                                   IsEditable="True" BorderThickness="0" />
                     </ControlTemplate>
                 </Setter.Value>
@@ -29,11 +29,21 @@
                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
                     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}" />
                 </Trigger>
+                <DataTrigger Binding="{Binding EnforceListValues}" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value}"
+                                  IsEditable="False" BorderThickness="0"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
                 <DataTrigger Binding="{Binding ListValues.Count}" Value="0">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <TextBox Text="{WPF:ValidatedBinding Value}" BorderThickness="0" Height="20.75" />
+                                <TextBox Text="{WPF:ValidatedBinding Value, StringFormat=N}" BorderThickness="0" Height="20.75" CharacterCasing="{Binding Case}" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -59,6 +69,16 @@
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
+                <DataTrigger Binding="{Binding Name}" Value="Material">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value}"
+                                  IsEditable="False" BorderThickness="0" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="DynamicDataGridLabelStyle" TargetType="{x:Type DataGridCell}">
@@ -66,6 +86,7 @@
             <Setter Property="Height" Value="Auto" />
             <Setter Property="Margin" Value="0,2,0,0" />
             <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="IsHitTestVisible" Value="False"/>
         </Style>
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
             <Setter Property="Margin" Value="0,0,0,0" />
@@ -247,7 +268,7 @@
                       ItemsSource="{Binding DynamicProperties}"
                       ScrollViewer.CanContentScroll="False"
                       HorizontalGridLinesBrush="WhiteSmoke"
-                      VerticalGridLinesBrush="WhiteSmoke" VerticalAlignment="Top" MaxHeight="350">
+                      VerticalGridLinesBrush="WhiteSmoke" MaxHeight="350" VerticalAlignment="Top">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding DispName}"
                                         CellStyle="{StaticResource DynamicDataGridLabelStyle}" MinWidth="140"

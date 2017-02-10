@@ -27,12 +27,21 @@
                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
                     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}" />
                 </Trigger>
+                <DataTrigger Binding="{Binding EnforceListValues}" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value}"
+                                  IsEditable="False" BorderThickness="0"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
                 <DataTrigger Binding="{Binding ListValues.Count}" Value="0">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <TextBox Text="{WPF:ValidatedBinding Value, StringFormat=N}" BorderThickness="0"
-                                         Height="25" />
+                                <TextBox Text="{WPF:ValidatedBinding Value, StringFormat=N}" BorderThickness="0" CharacterCasing="{Binding Case}" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -190,8 +199,6 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="140" />
@@ -253,20 +260,13 @@
                                  IsEnabled="{Binding ElementName=NumSchms, Path=IsEnabled}"
                                  Scheme="{Binding ElementName=NumSchms, Path=SelectedItem}"
                                  GeneratedNumberProperty="_GeneratedNumber" Style="{StaticResource NumSchmCtrlStyle}" />
-            <Label Content="{Binding UIString[LBL2], FallbackValue=Title}" Grid.Column="0" Grid.Row="5" />
-            <TextBox Text="{WPF:ValidatedBinding Prop[_XLTN_TITLE].Value}" Grid.Column="1" Grid.Row="5"
-                     Style="{StaticResource Required}" />
-            <Label Content="{Binding UIString[LBL3], FallbackValue=Description}" Grid.Column="0" Grid.Row="6"
-                   Height="Auto" />
-            <TextBox Text="{WPF:ValidatedBinding Prop[_XLTN_DESCRIPTION].Value}" Grid.Column="1" Grid.Row="6"
-                     x:Name="Description" AcceptsReturn="True" Height="Auto" />
-            <Label Content="{Binding UIString[LBL5],FallbackValue=Path}" Grid.Column="0" Grid.Row="8"
+            <Label Content="{Binding UIString[LBL5],FallbackValue=Path}" Grid.Column="0" Grid.Row="6"
                    BorderThickness="1" />
-            <TextBox Text="{WPF:ValidatedBinding Prop[_FilePath].Value}" Grid.Column="1" Grid.Row="8" IsReadOnly="True"
+            <TextBox Text="{WPF:ValidatedBinding Prop[_FilePath].Value}" Grid.Column="1" Grid.Row="6" IsReadOnly="True"
                      IsTabStop="False" BorderThickness="0,1,1,1" />
-            <Label Content="{Binding UIString[LBL6],FallbackValue=Filename}" Grid.Row="7" Grid.Column="0"
+            <Label Content="{Binding UIString[LBL6],FallbackValue=Filename}" Grid.Row="5" Grid.Column="0"
                    Visibility="{Binding NumSchmFieldsEmpty, ElementName=DSNumSchmsCtrl, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <TextBox Grid.Row="7" Grid.Column="1" x:Name="FILENAME" Text="{WPF:ValidatedBinding Name}"
+            <TextBox Grid.Row="5" Grid.Column="1" x:Name="FILENAME" Text="{WPF:ValidatedBinding Name}"
                      IsTabStop="False"
                      Visibility="{Binding NumSchmFieldsEmpty, ElementName=DSNumSchmsCtrl, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
@@ -278,7 +278,7 @@
                   ScrollViewer.CanContentScroll="True"
                   HorizontalGridLinesBrush="WhiteSmoke"
                   VerticalGridLinesBrush="WhiteSmoke" BorderBrush="Gray" MaxWidth="380"
-                  Margin="5,0,0,0">
+                  Margin="5,0,0,0" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Name}" CellStyle="{StaticResource DynamicDataGridLabelStyle}"
                                     MinWidth="140" Width="Auto" IsReadOnly="True">
@@ -289,7 +289,7 @@
                         </DataTemplate>
                     </DataGridTextColumn.HeaderTemplate>
                 </DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Value}" Width="*"
+                <DataGridTextColumn Binding="{Binding Value}" Width="*" MinWidth="180"
                                     CellStyle="{StaticResource DynamicDataGridCellStyle}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderTemplate>
                         <DataTemplate>

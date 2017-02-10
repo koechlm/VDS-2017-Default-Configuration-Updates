@@ -13,7 +13,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value}" IsEditable="True" BorderThickness="0"/>
+                        <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value, StringFormat=N}" IsEditable="True" BorderThickness="0"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -26,11 +26,21 @@
                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
                     <Setter Property="BorderBrush" Value="{DynamicResource {x:Static DataGrid.FocusBorderBrushKey}}"/>
                 </Trigger>
+                <DataTrigger Binding="{Binding EnforceListValues}" Value="True">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ComboBox ItemsSource="{Binding ListValues}" Text="{WPF:ValidatedBinding Value}"
+                                  IsEditable="False" BorderThickness="0"/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
                 <DataTrigger Binding="{Binding ListValues.Count}" Value="0">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate>
-                                <TextBox Text="{WPF:ValidatedBinding Value}" BorderThickness="0" Height="20.75"/>
+                                <TextBox Text="{WPF:ValidatedBinding Value, StringFormat=N}" BorderThickness="0" Height="20.75" CharacterCasing="{Binding Case}" />
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -182,7 +192,7 @@
                       SelectedValue="{Binding Prop[_Category].Value}"
                       DisplayMemberPath="Name"
                       SelectedItem="{Binding DynamicPropertiesCategory}"
-                      ItemsSource="{Binding PsList[GetCategories]}"
+                      ItemsSource="{Binding PsList[GetCategories], Mode=OneTime}"
                       IsEnabled="{Binding CreateMode}"/>
             <Label Grid.Row="2"
         		Grid.Column="0"
